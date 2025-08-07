@@ -16,5 +16,3 @@ async def start_cmd(message: Message, command: CommandStart):
             "Привет\n\n"
             "Нажмите кнопку ниже, чтобы начать.",
             reply_markup=reg_butt)
-    else:
-        await message.answer("Начните регистрацию нажав на кнопку в канале")
