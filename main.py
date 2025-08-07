@@ -1,5 +1,6 @@
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
+from handlers import start
 from dotenv import load_dotenv
 import asyncio
 import logging as log
@@ -16,6 +17,7 @@ d = Dispatcher(storage=MemoryStorage())
 
 async def main():
     logger.info("  Запуск")
+    d.include_router(start.router)
     await d.start_polling(b)
 
 if __name__ == "__main__":

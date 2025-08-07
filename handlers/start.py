@@ -2,15 +2,15 @@ from aiogram import Router
 from aiogram.filters import CommandStart
 from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
-start_cmd = Router()
+router = Router()
 
-@start_cmd.message(CommandStart(deep_link=True))
+@router.message(CommandStart(deep_link=True))
 async def start_cmd(message: Message, command: CommandStart):
     args = command.args
     if args == "reg":
         reg_butt = InlineKeyboardMarkup(
             inline_keyboard=[
-                [InlineKeyboardButton(text="Записатся", callback_data="register")]
+                [InlineKeyboardButton(text="Записаться", callback_data="register")]
             ])
         await message.answer(
             "Привет\n\n"
