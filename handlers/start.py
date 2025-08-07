@@ -17,4 +17,4 @@ async def start_cmd(message: Message, command: CommandStart):
             "Нажмите кнопку ниже, чтобы начать.",
             reply_markup=reg_butt)
     else:
-        await message.answer("Перейдите по кнопке из телеграм канала")
+        await message.answer("Начните регистрацию нажав на кнопку в канале")
