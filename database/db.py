@@ -12,17 +12,16 @@ def init_db():
             name TEXT NOT NULL,
             phone TEXT NOT NULL,
             usrname TEXT,
-            chat_id INTEGER NOT NULL
         )
         """)
 
         conn.commit()
 
-def add_registration(name: str, phone: str, usrname: str, chat_id: int):
+def add_registration(name: str, phone: str, usrname: str):
     with sqlite3.connect(DB) as conn:
         cursor = conn.cursor()
         cursor.execute("""
-        INSERT INTO registrations (name, phone, usrname, chat_id)
+        INSERT INTO registrations (name, phone, usrname)
         VALUES (?, ?, ?, ?)
-        """, (name, phone, usrname, chat_id))
+        """, (name, phone, usrname))
         conn.commit()

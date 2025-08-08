@@ -2,6 +2,7 @@ from aiogram import Router, F
 from aiogram.types import CallbackQuery, Message
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.fsm.context import FSMContext
+from database.db import add_registration
 
 router = Router()
 
@@ -29,6 +30,12 @@ async def process_phone(message: Message, state: FSMContext):
 
     data = await state.get_data()
 
+    add_registration(
+        name=data['name'],
+        phone=data['phone'],
+        usrname=username
+    )
+
     await message.answer(
         f"Вы успешно зарегистрировались!\n\n"
         f"Имя: {data['name']}\n"
@@ -36,6 +43,6 @@ async def process_phone(message: Message, state: FSMContext):
         f"TG никнейм: @{data['username']}"
     )
 
-    print("Новая регистрация:", data)  # TODO: сделать сохранение в базу данных
+    print("Новая регистрация:", data)
 
     await state.clear()
