@@ -33,7 +33,7 @@ def main():
     while True:
         data = get_data_from_db()
         update_google_sheet(data)
-        time.sleep(120)
+        time.sleep(600)
 
 if __name__ == "__main__":
     main()
