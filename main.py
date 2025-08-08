@@ -1,13 +1,15 @@
-from aiogram import Bot, Dispatcher
-from aiogram.fsm.storage.memory import MemoryStorage
-from handlers import start, register
-from database import db
-from sheets import sync
-from dotenv import load_dotenv
 import asyncio
 import logging as log
 import os
 import threading
+
+from aiogram import Bot, Dispatcher
+from aiogram.fsm.storage.memory import MemoryStorage
+from dotenv import load_dotenv
+
+from database import db
+from handlers import register, start
+from sheets import sync
 
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_T")

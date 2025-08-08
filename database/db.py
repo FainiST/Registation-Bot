@@ -1,6 +1,5 @@
 import sqlite3
 from pathlib import Path
-from sheets.sync import update_google_sheet
 
 DB = Path(__file__).parent / "registrs.db"
 
