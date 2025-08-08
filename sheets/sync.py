@@ -15,10 +15,12 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapi
 CREDS_FILE = 'cred.json'
 
 def get_data_from_db():
-    with sqlite3.connect(DB) as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT name, phone, usrname FROM registrations")
-        return cursor.fetchall()
+    conn = sqlite3.connect('../database/registrs.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT name, phone, usrname FROM registrations")
+    data = cursor.fetchall()
+    conn.close()
+    return data
 
 def update_google_sheet(data):
     creds = Credentials.from_service_account_file(CREDS_FILE, scopes=SCOPES)
