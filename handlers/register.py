@@ -10,7 +10,7 @@ class Registr(StatesGroup):
     phone = State()
     usrname = State()
 
-@router.callback_query(F.data == "start_registration")
+@router.callback_query(F.data == "register")
 async def start_registration(callback: CallbackQuery, state: FSMContext):
     await callback.message.answer("Введите ваше имя:")
     await state.set_state(Registr.name)
