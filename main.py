@@ -1,7 +1,8 @@
 from aiogram import Bot, Dispatcher
 from aiogram.fsm.storage.memory import MemoryStorage
 from handlers import start, register
-from database.db import init_db
+from database import db as db
+from sheets import sync
 from dotenv import load_dotenv
 import asyncio
 import logging as log
@@ -17,7 +18,6 @@ b = Bot(token=BOT_TOKEN, parse_mode="HTML")
 d = Dispatcher(storage=MemoryStorage())
 
 async def main():
-    init_db()
     logger.info("  Запуск")
 
     d.include_router(start.router)
@@ -26,4 +26,6 @@ async def main():
     await d.start_polling(b)
 
 if __name__ == "__main__":
+    db.init_db()
+    sync.main()
     asyncio.run(main())

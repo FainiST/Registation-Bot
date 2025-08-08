@@ -22,6 +22,6 @@ def add_registration(name: str, phone: str, usrname: str):
         cursor = conn.cursor()
         cursor.execute("""
         INSERT INTO registrations (name, phone, usrname)
-        VALUES (?, ?, ?, ?)
+        VALUES (?, ?, ?)
         """, (name, phone, usrname))
         conn.commit()
