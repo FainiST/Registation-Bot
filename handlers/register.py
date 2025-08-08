@@ -20,3 +20,22 @@ async def process_name(message: Message, state: FSMContext):
     await state.update_data(name=message.text)
     await message.answer("Введите ваш номер телефона:")
     await state.set_state(Registr.phone)
+
+@router.message(Registr.phone)
+async def process_phone(message: Message, state: FSMContext):
+    await state.update_data(phone=message.text)
+    username = message.from_user.username or "—"
+    await state.update_data(username=username)
+
+    data = await state.get_data()
+
+    await message.answer(
+        f"Вы успешно зарегистрировались!\n\n"
+        f"Имя: {data['name']}\n"
+        f"Телефон: {data['phone']}\n"
+        f"TG никнейм: @{data['username']}"
+    )
+
+    print("Новая регистрация:", data)  # TODO: сделать сохранение в базу данных
+
+    await state.clear()
