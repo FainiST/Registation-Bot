@@ -31,7 +31,7 @@ def update_google_sheet(data):
 
 def main():
     while True:
-        print("Синхронизация с таблицами")
+        print()
         data = get_data_from_db()
         update_google_sheet(data)
         time.sleep(350)
