@@ -13,6 +13,6 @@ async def start_cmd(message: Message, command: CommandStart):
                 [InlineKeyboardButton(text="Записаться", callback_data="register")]
             ])
         await message.answer(
-            "Привет\n\n"
-            "Нажмите кнопку ниже, чтобы начать.",
+            "Привет друг! \n\n"
+            "Мы рады, что ты на Связи! Давай запишемся на мастер-класс",
             reply_markup=reg_butt)
