@@ -16,7 +16,6 @@ async def start_registration(callback: CallbackQuery, state: FSMContext):
     await callback.message.answer("Введите ваше ФИО:")
     await state.set_state(Registr.name)
 
-
 @router.message(Registr.name)
 async def process_name(message: Message, state: FSMContext):
     await state.update_data(name=message.text)
