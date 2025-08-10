@@ -5,9 +5,10 @@ from aiogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 router = Router()
 
 @router.message(CommandStart(deep_link=True))
-async def start_cmd(message: Message, command: CommandStart):
-    args = command.args
-    if args == "reg":
+async def start_cmd(message: Message):
+    parts = (message.text or "").split(maxsplit=1)
+    arg = parts[1] if len(parts) > 1 else ""
+    if arg == "reg":
         reg_butt = InlineKeyboardMarkup(
             inline_keyboard=[
                 [InlineKeyboardButton(text="Записаться", callback_data="register")]

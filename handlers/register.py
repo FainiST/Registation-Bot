@@ -13,6 +13,7 @@ class Registr(StatesGroup):
 
 @router.callback_query(F.data == "register")
 async def start_registration(callback: CallbackQuery, state: FSMContext):
+    await callback.answer()
     await callback.message.answer("Введите ваше ФИО:")
     await state.set_state(Registr.name)
 
@@ -24,6 +25,10 @@ async def process_name(message: Message, state: FSMContext):
 
 @router.message(Registr.phone)
 async def process_phone(message: Message, state: FSMContext):
+    if not (message.text or "").isdigit():
+        await message.answer("Пожалуйста, введите номер только цифрами.")
+        return
+
     await state.update_data(phone=message.text)
     username = message.from_user.username or "—"
     await state.update_data(username=username)
