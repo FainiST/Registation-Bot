@@ -21,9 +21,11 @@
      ```env
      BOT_T=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
      ```
-   - Положить ключ сервисного аккаунта Google в `sheets/cred.json`.
+   - Секреты Google (service account):
+     - Рекомендуемый способ — переменные окружения (`GOOGLE_...`, см. ниже) или локальный файл `.secrets/cred.json` (не попадает в git).
+     - Поддерживается также fallback-файл `sheets/cred.json` для локальной разработки, но он игнорируется git.
 
-   Важно: хранить ключ в Git‑репозитории небезопасно. Рекомендуется исключить его из контроля версий и хранить секреты вне репозитория.
+   Важно: ключи не должны попадать в репозиторий. Файлы в `.secrets/` и `sheets/cred.json` игнорируются `.gitignore`.
 
 ### Запуск
 ```bash
@@ -37,8 +39,29 @@ python main.py
 - Нажмите кнопку «Записаться» и следуйте инструкциям
 
 ### Конфигурация синхронизации
-- Идентификатор таблицы и листа задаются в `sheets/sync.py` (`SHEET_ID`, `SHEET_NAME`)
+- Идентификатор таблицы и листа задаются через переменные окружения или дефолты в `sheets/sync.py`:
+  - `GSHEET_ID` — id таблицы
+  - `GSHEET_DATA_SHEET` — лист с данными (по умолчанию `Sheet1`)
+  - `GSHEET_META_SHEET` — лист для метаданных (по умолчанию `meta`)
 - Заголовки столбцов: `name`, `phone`, `usrname`
+
+### Конфигурация Google Service Account (любой из способов)
+1) Через переменные окружения:
+   ```env
+   GOOGLE_TYPE=service_account
+   GOOGLE_PROJECT_ID=...
+   GOOGLE_PRIVATE_KEY_ID=...
+   GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+   GOOGLE_CLIENT_EMAIL=...
+   GOOGLE_CLIENT_ID=...
+   GOOGLE_AUTH_URI=https://accounts.google.com/o/oauth2/auth
+   GOOGLE_TOKEN_URI=https://oauth2.googleapis.com/token
+   GOOGLE_AUTH_PROVIDER_X509_CERT_URL=https://www.googleapis.com/oauth2/v1/certs
+   GOOGLE_CLIENT_X509_CERT_URL=...
+   GOOGLE_UNIVERSE_DOMAIN=googleapis.com
+   ```
+2) Через файл `.secrets/cred.json` (безопасный локальный путь, игнорируется git).
+3) В качестве fallback — `sheets/cred.json` (не рекомендуется для продакшн).
 
 ### Полезно знать
 - Виртуальное окружение `.venv/` исключено в `.gitignore`
