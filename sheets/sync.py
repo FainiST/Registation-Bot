@@ -9,7 +9,7 @@ from google.oauth2.service_account import Credentials
 
 from database.db import DB as DB_PATH
 
-SHEET_ID = os.getenv('GSHEET_ID', '1Qpm2cakUmtEqe4g7AI6U4S1tb2AyLCkRCBZ3cdYPgXc')
+SHEET_ID = os.getenv('GSHEET_ID', '')
 SHEET_NAME = os.getenv('GSHEET_DATA_SHEET', 'Sheet1')
 
 META_SHEET_NAME = os.getenv('GSHEET_META_SHEET', 'meta')
