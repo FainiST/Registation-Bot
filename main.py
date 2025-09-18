@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 from database import db
 from handlers import register, start
 from sheets import sync
+from handlers.start import load_m
 
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_T")
@@ -30,9 +31,11 @@ def run_sync():
     sync.main()
 
 if __name__ == "__main__":
-    db.init_db()
+		db.init_db()
 
-    thread = threading.Thread(target=run_sync, daemon=True)
-    thread.start()
+		load_m()
 
-    asyncio.run(main())
+		thread = threading.Thread(target=run_sync, daemon=True)
+		thread.start()
+
+		asyncio.run(main())
