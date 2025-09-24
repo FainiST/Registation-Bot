@@ -30,7 +30,7 @@ async def process_phone(message: Message, state: FSMContext):
         return
 
     await state.update_data(phone=message.text)
-    username = message.from_user.username or "—"
+    username = message.from_user.username or "нету"
     await state.update_data(username=username)
 
     data = await state.get_data()
@@ -45,7 +45,7 @@ async def process_phone(message: Message, state: FSMContext):
         f"Вы успешно зарегистрировались!\n\n"
         f"Имя: {data['name']}\n"
         f"Телефон: {data['phone']}\n"
-        f"TG никнейм: @{data['username']}"
+        f"Telegram username: @{data['username']}"
     )
 
     print("Новая регистрация:", data)

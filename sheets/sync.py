@@ -4,8 +4,8 @@ import sqlite3
 import logging
 from pathlib import Path
 
-import gspread
-from google.oauth2.service_account import Credentials
+import gspread # pyright: ignore[reportMissingImports]
+from google.oauth2.service_account import Credentials # pyright: ignore[reportMissingImports]
 
 from database.db import DB as DB_PATH
 
@@ -48,7 +48,6 @@ def ensure_sheets_and_get_last_synced(client):
         spreadsheet.add_worksheet(title=META_SHEET_NAME, rows=10, cols=2)
     meta_sheet = spreadsheet.worksheet(META_SHEET_NAME)
 
-    # last_synced_id храним в ячейке A1
     meta_values = meta_sheet.get('A1')
     last_synced_id = 0
     if meta_values and meta_values[0] and len(meta_values[0]) > 0:
